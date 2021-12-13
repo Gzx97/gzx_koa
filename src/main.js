@@ -6,7 +6,7 @@ const app = require('./app')
 // app.listen(APP_PORT, () => {
 //   console.log(`server is running on http://localhost:${APP_PORT}`);
 // });
-
+console.log(APP_PORT)
 app.listen(8000, () => {
   console.log(`server is running on http://localhost:${8000}`);
 });
