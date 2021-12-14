@@ -1,3 +1,8 @@
+router url转发给控制器不同方法
+controller 业务逻辑 解析接口 -》 操作数据库 -》 返回结果
+service 通过model操作数据库  https://www.sequelize.com.cn/
+model 数据模型
+
 # 一. 项目的初始化
 
 ## 1 npm 初始化
