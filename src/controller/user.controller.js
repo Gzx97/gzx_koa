@@ -19,15 +19,15 @@ class UserController {
     // }
     // 合理性
 
-    //  if(getUserInfo({user_name})){
-    //   ctx.status = 409;
-    //   ctx.body = {
-    //     code: "10002",
-    //     msg: "用户已经存在",
-    //     data: "",
-    //   };
-    //   return
-    //  }
+     if( await getUserInfo({user_name})){
+      ctx.status = 409;
+      ctx.body = {
+        code: "10002",
+        msg: "用户已经存在",
+        data: "",
+      };
+      return
+     }
     const res = await createUser(user_name, password);
 
     ctx.body = {
