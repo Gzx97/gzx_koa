@@ -8,26 +8,26 @@ class UserController {
 
     // console.log(res);
     // 合法性 
-    if (!user_name || !password) {
-      ctx.status = 400;
-      ctx.body = {
-        code: "10001",
-        msg: "用户名密码为空",
-        data: "",
-      };
-      return;
-    }
+    // if (!user_name || !password) {
+    //   ctx.status = 400;
+    //   ctx.body = {
+    //     code: "10001",
+    //     msg: "用户名密码为空",
+    //     data: "",
+    //   };
+    //   return;
+    // }
     // 合理性
 
-     if(getUserInfo({user_name})){
-      ctx.status = 409;
-      ctx.body = {
-        code: "10002",
-        msg: "用户已经存在",
-        data: "",
-      };
-      return
-     }
+    //  if(getUserInfo({user_name})){
+    //   ctx.status = 409;
+    //   ctx.body = {
+    //     code: "10002",
+    //     msg: "用户已经存在",
+    //     data: "",
+    //   };
+    //   return
+    //  }
     const res = await createUser(user_name, password);
 
     ctx.body = {
