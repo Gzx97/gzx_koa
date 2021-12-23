@@ -3,20 +3,16 @@ class UserController {
   async register(ctx, next) {
     // 获取数据 操作数据库(service层) 返回结果
     // console.log(ctx.request.body);
+    let body = ctx.request.body
+    try {
+      body =  JSON.parse(ctx.request.body);
+    } catch (e) {
+      // console.log("请求数据异常", e);
+    }
+    const { user_name, password } = body
 
-    const { user_name, password } = ctx.request.body;
+  
 
-    // console.log(res);
-    // 合法性 
-    // if (!user_name || !password) {
-    //   ctx.status = 400;
-    //   ctx.body = {
-    //     code: "10001",
-    //     msg: "用户名密码为空",
-    //     data: "",
-    //   };
-    //   return;
-    // }
     // 合理性
 
      if( await getUserInfo({user_name})){

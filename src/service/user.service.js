@@ -2,7 +2,7 @@ const User = require("../model/user.model");
 class UserService {
   async createUser(user_name, password) {
     // 写入数据库
-    console.log(user_name, password);
+    // console.log(user_name, password);
     // await表达式: promise对象的值
     const res = await User.create({
       user_name,
@@ -17,12 +17,10 @@ class UserService {
     user_name && Object.assign(whereOpt, { user_name });
     password && Object.assign(whereOpt, { password });
     is_admin && Object.assign(whereOpt, { is_admin });
-
     const res = await User.findOne({
       attributes: ["id", "user_name", "password", "is_admin"],
       where: whereOpt,
     });
-
     return res ? res.dataValues : null
   }
 }
