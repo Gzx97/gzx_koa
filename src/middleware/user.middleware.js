@@ -1,4 +1,5 @@
 const { getUserInfo } = require("../service/user.service");
+const {userFormateError,userAlreadyExisted} = require("../constants/err.type");
 // 验证用户名密码是否为空
 const userValidator = async (ctx, next) => {
   let body = ctx.request.body;
@@ -9,12 +10,7 @@ const userValidator = async (ctx, next) => {
   }
   const { user_name, password } = body;
   if (!user_name || !password) {
-    ctx.status = 400;
-    ctx.body = {
-      code: "10001",
-      msg: "用户名密码为空mi",
-      data: "",
-    };
+    ctx.app.emit("error", userFormateError, ctx);
     return;
   }
 
@@ -31,12 +27,7 @@ const verifyUser = async (ctx, next) => {
   const { user_name, password } = body;
 
   if (await getUserInfo({ user_name })) {
-    ctx.status = 409;
-    ctx.body = {
-      code: "10002",
-      msg: "用户已经存在",
-      data: "",
-    };
+    ctx.app.emit("error", userAlreadyExisted, ctx);
     return;
   }
   await next();
