@@ -1,7 +1,6 @@
 const { getUserInfo } = require("../service/user.service");
-
+// 验证用户名密码是否为空
 const userValidator = async (ctx, next) => {
-  // console.log(ctx.request.body)
   let body = ctx.request.body;
   try {
     body = JSON.parse(ctx.request.body);
@@ -18,7 +17,28 @@ const userValidator = async (ctx, next) => {
     };
     return;
   }
+
   await next();
 };
+// 验证用户名是否存在
+const verifyUser = async (ctx, next) => {
+  let body = ctx.request.body;
+  try {
+    body = JSON.parse(ctx.request.body);
+  } catch (e) {
+    // console.log("请求数据异常", e);
+  }
+  const { user_name, password } = body;
 
-module.exports = { userValidator };
+  if (await getUserInfo({ user_name })) {
+    ctx.status = 409;
+    ctx.body = {
+      code: "10002",
+      msg: "用户已经存在",
+      data: "",
+    };
+    return;
+  }
+  await next();
+};
+module.exports = { userValidator, verifyUser };
